@@ -26,6 +26,23 @@
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+     <style>
+        #navigation a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        #navigation a:hover {
+            color: #007bff;
+        }
+        .service_area, .latest_coures_area, .recent_event_area, .recent_news_area {
+            margin-bottom: 100px;
+        }
+        .section__padding {
+            padding-top: 100px;
+        }
+    </style>
 </head>
 
 <body>
@@ -59,17 +76,6 @@
                                                 <li><a  href="#team">команда</a></li>
                                                 <li><a href="#connection">контакты</a></li>
                                             </ul>
-<style>
-#navigation a {
-    text-decoration: none;
-    color: #333;
-    transition: color 0.3s ease;
-}
-
-#navigation a:hover {
-    color: #007bff;
-}
-</style>
                                         </nav>
                                     </div>
                                     <div class="Appointment">
@@ -147,7 +153,7 @@
         <div class="container">
             <div class="row justify-content-center ">
                 <div class="col-lg-4 col-md-6">
-                    <div class="single_service d-flex align-items-center ">
+                    <div class="single_service d-flex align-items-center">
                         <div class="icon">
                             <img src="img/icon/market-research.png" style="width: 40px; margin-left: 5px; " alt="">
                         </div>
@@ -216,9 +222,9 @@
         </div>
     </div>
     <!--/ service_area_start  -->
- <SPan id="experience"></SPan>
+ <span ></span>
     <!-- popular_program_area_start  -->
-    <div class="popular_program_area section__padding">
+    <div class="popular_program_area section__padding" id="experience">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -363,7 +369,7 @@
         <div class="latest_coures_inner">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-7">
                         <div class="coures_info">
                             <div class="section_title white_text">
                                 <p>Arlan Property — это ведущая управляющая компания, специализирующаяся <br> на коммерческой недвижимости. Мы предоставляем комплексные <br> услуги по поиску, управлению и продаже объектов недвижимости, <br> обеспечивая нашим клиентам стабильный доход и минимальные риски. 
@@ -397,8 +403,8 @@
     <!--/ latest_coures_area_end -->
 
 <!-- recent_event_area_start -->
- <SPan id="objects"></SPan>
-<div class="recent_event_area section__padding">
+ <SPan></SPan>
+<div class="recent_event_area section__padding" id="objects">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
@@ -503,12 +509,12 @@
     <!--/ latest_coures_area_end -->
 
     <!-- recent_news_area_start  -->
-    <div class="recent_news_area section__padding">
+    <div class="recent_news_area section__padding" id="team">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-10">
                     <div class="section_title text-center mb-70">
-                        <SPan id="team"></SPan>
+                        <SPan></SPan>
                         <h3 class="mb-45">Наша команда:</h3>
                         
                     </div>
@@ -566,26 +572,26 @@
                     <div class="col-lg-7">
                         <div class="admission_form">
                             <h3>Подать заявку на поступление</h3>
-                            <form action="#">
+                            <form action="/contact_process.php" method="post">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="single_input">
-                                            <input type="text" placeholder="ваше имя" >
+                                            <input type="text" name="firstname" placeholder="Ваше имя" >
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="single_input">
-                                            <input type="text" placeholder="ваша фамилия" >
+                                            <input type="text" name="lastname" placeholder="Ваша фамилия" >
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="single_input">
-                                            <input type="text" placeholder="ваш номер" >
+                                            <input type="text" name="phone" placeholder="Ваш номер" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="single_input">
-                                            <input type="text" placeholder="Email" >
+                                            <input type="email" name="email" placeholder="Email" >
                                         </div>
                                     </div>
                                     <div class="col-md-12">
