@@ -1,45 +1,58 @@
 <?php
 $to = "chaddi_3d@mail.ru";
-$from = filter_var($_REQUEST['email'], FILTER_SANITIZE_EMAIL);
-$name = htmlspecialchars($_REQUEST['name']);
-$subject = htmlspecialchars($_REQUEST['subject']);
-$number = htmlspecialchars($_REQUEST['number']);
-$cmessage = htmlspecialchars($_REQUEST['message']);
 
-if (!filter_var($from, FILTER_VALIDATE_EMAIL)) {
+// Собираем данные, подставляя пустые строки при отсутствии
+$from = "noreply@wiser.kz";
+$firstname = isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname']) : '';
+$lastname = isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname']) : '';
+$phone = isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : '';
+$email = isset($_POST['email']) ? filter_var($_POST['email'], FILTER_SANITIZE_EMAIL) : '';
+$message = isset($_POST['message']) ? htmlspecialchars($_POST['message']) : '';
+
+// Проверка валидности email
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     die("Неверный email");
 }
 
+// Заголовки
 $headers = "From: $from\r\n";
 $headers .= "Reply-To: $from\r\n";
 $headers .= "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
-$email_subject = "You have a message from your Bitmap Photography.";
+$email_subject = "Новая заявка на поступление";
 
-$logo = 'https://example.com/img/logo.png'; // Абсолютный URL
-$link = 'https://example.com';
-
-$body = "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Express Mail</title></head><body>";
+// HTML-письмо с тем же стилем таблицы
+$body = "<!DOCTYPE html><html lang='ru'><head><meta charset='UTF-8'><title>Заявка</title></head><body>";
 $body .= "<table style='width: 100%;'>";
 $body .= "<thead style='text-align: center;'><tr><td style='border:none;' colspan='2'>";
-$body .= "<a href='{$link}'><img src='{$logo}' alt=''></a><br><br>";
+$body .= "<h2>Заявка на поступление</h2>";
 $body .= "</td></tr></thead><tbody><tr>";
-$body .= "<td style='border:none;'><strong>Name:</strong> {$name}</td>";
-$body .= "<td style='border:none;'><strong>Email:</strong> {$from}</td>";
-$body .= "</tr>";
-$body .= "<tr><td style='border:none;'><strong>Subject:</strong> {$subject}</td></tr>";
-$body .= "<tr><td style='border:none;'><strong>Phone:</strong> {$number}</td></tr>";
-$body .= "<tr><td></td></tr>";
-$body .= "<tr><td colspan='2' style='border:none;'>{$cmessage}</td></tr>";
-$body .= "</tbody></table>";
+if(!empty($firstname)) {
+    $body .= "<td style='border:none;'><strong>Имя:</strong> {$firstname}</td>";
+}
+if(!empty($lastname)) {
+    $body .= "<td style='border:none;'><strong>Фамилия:</strong> {$lastname}</td>";
+}
+$body .= "</tr><tr>";
+if(!empty($phone)) {
+    $body .= "<td style='border:none;'><strong>Телефон:</strong> {$phone}</td>";
+}
+if(!empty($email)) {
+    $body .= "<td style='border:none;'><strong>Email:</strong> {$email}</td>";
+}
+$body .= "</tr><tr>";
+if(!empty($message)) {
+    $body .= "<td colspan='2' style='border:none;'><strong>Сообщение:</strong><br>{$message}</td>";
+}
+$body .= "</tr></tbody></table>";
 $body .= "</body></html>";
 
+// Отправка
 $send = mail($to, $email_subject, $body, $headers);
 
 if ($send) {
-    echo "Письмо отправлено!";
+    header("Location: /");
 } else {
-    echo "Ошибка при отправке письма.";
+    header("Location: /");
 }
-?>
