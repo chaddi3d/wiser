@@ -3,11 +3,11 @@ $to = "chaddi_3d@mail.ru";
 
 // Собираем данные, подставляя пустые строки при отсутствии
 $from = "noreply@wiser.kz";
-$firstname = isset($_GET['firstname']) ? htmlspecialchars($_GET['firstname']) : '';
-$lastname = isset($_GET['lastname']) ? htmlspecialchars($_GET['lastname']) : '';
-$phone = isset($_GET['phone']) ? htmlspecialchars($_GET['phone']) : '';
-$email = isset($_GET['email']) ? filter_var($_GET['email'], FILTER_SANITIZE_EMAIL) : '';
-$message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
+$firstname = isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname']) : '';
+$lastname = isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname']) : '';
+$phone = isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : '';
+$email = isset($_POST['email']) ? filter_var($_POST['email'], FILTER_SANITIZE_EMAIL) : '';
+$message = isset($_POST['message']) ? htmlspecialchars($_POST['message']) : '';
 
 // Проверка валидности email
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
